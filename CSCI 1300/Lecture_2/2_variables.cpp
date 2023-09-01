@@ -66,6 +66,6 @@ int main()
 
 
     // Ranges for Data Types: https://docs.microsoft.com/en-us/cpp/cpp/data-type-ranges?view=msvc-170 
-    
+    char d = 'a';
     return 0;
 }
