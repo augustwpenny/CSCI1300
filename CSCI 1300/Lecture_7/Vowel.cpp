@@ -20,7 +20,7 @@ int main()
     cout << "enter radius: " << endl;
     cin >> radius;
 
-    double area = pi * radisu * radius;
+    double area = pi * radius * radius;
 
     cout << "area: " << area << endl;
 
