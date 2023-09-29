@@ -1,5 +1,6 @@
 #include<iostream>
 #include<iomanip>
+#include<cassert>
 
 
 using namespace std;
@@ -18,40 +19,21 @@ bool isVowel(char letter)
 
 }
 
-bool isValidInt(int I)
-{   //sample if statement but can be changed for any condition
-    if(I < 0){
-        return true;
-    }
-    else{
-        return false;
-    }
+
+
+double areaCircle(double radius)
+{
+    return 3.14*(radius*radius);
 }
+
 
 
 
 int main()
 {
-    char v1;
-    char v2;
-    char v3;
-    char v4;
+    assert(areaOfCircle(10)==314);
 
-    cin >> v1;
-    cin >> v2;
-    cin >> v3;
-    cin >> v4;
-
-    bool v1t=isVowel(v1);
-    bool v2t=isVowel(v2);
-    bool v3t=isVowel(v3);
-    bool v4t=isVowel(v4);
-
-
-
-
-    cout << v1t << v2t << v3t <<  v4t << endl;
-
+    
 }
 
 
