@@ -2,7 +2,17 @@
 #include<iomanip>
 #include<cmath>
 #include<cstring>
+#include<limits>
+#include<climits>
+
 using namespace std;
+
+// CSCI 1300 Fall 2023
+// Author: August Penny
+// TA: Guarav
+
+
+
 
 char shiftChar(char c, int i);
 int getMethod2ShiftAmount(string key);
@@ -10,90 +20,158 @@ int getMethod3ShiftAmount(string key1, string key2);
 char encryptChar(char c, int choice, string key1, string key2);
 char decryptChar(char c, int choice, string key1, string key2);
 string encryptMessage(string msg, int choice, string key1, string key2);
+string decryptMessage(string msg, int choice, string key1, string key2);
+void callMenu();
 
 int main(){
 
-    // shiftChar method:
+
+int encryptMethod=0;
+string k1="";
+string k2="";
+int menuChoice=0;
+
+cout << "Please input 1-6 followed by enter to navigate the menu:\n1. Set Encryption Key 1\n2. Set Encryption Key 2\n3. Select Encryption Method\n4. Encrypt Message\n5. Decrypt Message\n6. Exit Program" << endl; 
+while(menuChoice!=6)
+{
     
-    // char a;
-    // int p;
-    // cout << " enter char:" << endl;
-    // cin >> a;
-    // cout << " enter num:" << endl;
-    // cin >> p;
-    // cout << shiftChar(a,p);
+    cin >> menuChoice;
+    cin.clear();
+    cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+    
 
-    // getMethod2ShiftAmount
+    if(menuChoice<1 || menuChoice>6)
+    {
+        cout << "Invalid input" << endl;
+        continue;
+    }else if(menuChoice == 1)
+    {
+       do
+        {
+            cout << "Enter key: " << endl;
+            getline(cin, k1);
+            
+            if(k1.length()<1)
+            {
+                cout << "Invalid key" << endl;
+                continue;
+            }
+            
+        }while(k1.length()<1);
+        cout << "Successfully set encryption key1 to " << k1 << endl;
+        callMenu();
+        continue;
+    }else if(menuChoice == 2)
+    {
+         
+        do
+        {
+            cout << "Enter key: " << endl;
+            getline(cin, k2);
+            
+            if(k2.length()<1)
+            {
+                cout << "Invalid key" << endl;
+                continue;
+            }
+            
+        }while(k2.length()<1);
+        cout << "Successfully set encryption key2 to " << k2 <<endl;
+        callMenu();
+        continue;
+    }else if(menuChoice == 3)
+    {
+        int temp=0;   
+        cout << "Please input 1-4 to decide encryption technique.\n1. Method1 only (shift by 1)\n2. Method2 only (shift by first key)\n3. Method3 only (shift by both keys)\n4. Mix of Method1, Method2, Method3" << endl;
+        do
+        {
+            cin >> temp;
+            cin.clear();
+            cin.ignore(numeric_limits<std::streamsize>::max(), '\n');
+            
+            if(temp<=4 && temp>=1)
+            {
+                break;
+            } else {
+                cout << "Invalid encryption choice" << endl;
+                continue;
+            }
+        }while(temp<1 || temp>4);
+        encryptMethod=temp;
+        cout << "Successfully set encryption type to " << encryptMethod << endl;
+        callMenu();
+        continue;
+    }else if(menuChoice==4)
+    {
+        string enc;
+        if(k1.length()<1 || k2.length()<1 || encryptMethod < 1 || encryptMethod > 4)
+        {
+            cout << "You cannot do this until you set both keys and choose an encryption method" << endl;
+        } else 
+        {
+            cout << "Enter your message to encrypt:" << endl;
+            getline(cin, enc);
+            
+        }
+        if(encryptMethod==1){
+            cout << encryptMessage(enc, 1, k1, k2)<< endl;;
+        }
+        if(encryptMethod==2){
+            cout << encryptMessage(enc, 2, k1, k2)<< endl;;
+        }
+        if(encryptMethod==3){
+            cout << encryptMessage(enc, 3, k1, k2)<< endl;;
+        }
+        if(encryptMethod==4){
+            cout << encryptMessage(enc, 4, k1, k2)<< endl;;
+        }
+        callMenu();
+    }else if(menuChoice==5)
+    {
+        string dec;
+        if(k1.length()<1 || k2.length()<1 || encryptMethod < 1 || encryptMethod > 4)
+        {
+            cout << "You cannot do this until you set both keys and choose an encryption method" << endl;
+        } else 
+        {
+            cout << "Enter your message to decrypt:" << endl;
+            getline(cin, dec);
+            
+        }
+        if(encryptMethod==1){
+            cout << decryptMessage(dec, 1, k1, k2)<< endl;;
+        }
+        if(encryptMethod==2){
+            cout << decryptMessage(dec, 2, k1, k2)<< endl;;
+        }
+        if(encryptMethod==3){
+            cout << decryptMessage(dec, 3, k1, k2)<< endl;;
+        }
+        if(encryptMethod==4){
+            cout << decryptMessage(dec, 4, k1, k2)<< endl;;
+        }
+        if(menuChoice==6) 
+        {
+        
+        }
+        callMenu();
+    } 
+    if(menuChoice==6)
+        {
+            break;
+        }
+   
+} while (menuChoice!=6);
+cout << "Goodbye." << endl;
 
-    // string s;
-    // cout << "Enter String" << endl;
-    // cin >> s;
-    // cout << getMethod2ShiftAmount(s) << endl;
-
-    // getMethod3ShiftAmount
-
-    // string s1;
-    // string s2;
-    // cout << "input string 1:" << endl;
-    // cin >> s1;
-    // cout << "input string 2:" << endl;
-    // cin >> s2;
-    // cout << getMethod3ShiftAmount(s1,s2);
 
 
-    // char c;
-    // string k1;
-    // string k2;
-    // int m;
-    // cout << "Enter character:" << endl;
-    // cin >> c;
-    // cout << "Enter key 1:" << endl;
-    // cin >> k1;
-    // cout << "Enter key 2:" << endl;
-    // cin >> k2;
-    // cout << "Enter method:" << endl;
-    // cin >> m;
-    // cout << encryptChar(c, m, k1, k2) << endl;
-
-    // char c;
-    // string k1;
-    // string k2;
-    // int m;
-    // cout << "Enter character:" << endl;
-    // cin >> c;
-    // cout << "Enter key 1:" << endl;
-    // cin >> k1;
-    // cout << "Enter key 2:" << endl;
-    // cin >> k2;
-    // cout << "Enter method:" << endl;
-    // cin >> m;
-
-    // cout << decryptChar(c, m, k1, k2) << endl;
+}
 
 
-
-    // string s = "";
-    // string k1 = "";
-    // string k2 = "";
-    // int i=0;
-
-
-    // cout << "enter message";
-    // cin >> s;
-    // cout << endl;
-
-    // cout << "enter key1";
-    // cin >> k1;
-    // cout << endl;
-
-    // cout << "enter key2";
-    // cin >>k2;
-    // cout << endl;
-
-    // cout << "method" << endl;
-    // cin >>i;
-
-    // cout << encryptMessage(s, i, k1, k2) << endl;
+void callMenu()
+{
+    cout << "Please input 1-6 followed by enter to navigate the menu:\n1. Set Encryption Key 1\n2. Set Encryption Key 2\n3. Select Encryption Method\n4. Encrypt Message\n5. Decrypt Message\n6. Exit Program" << endl; 
 }
 
 string decryptMessage(string msg, int choice, string key1, string key2)
