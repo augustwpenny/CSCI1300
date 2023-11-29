@@ -1,0 +1,16 @@
+Austin FC,30,30
+Colorado Rapids,28,45
+FC Dallas,25,20
+Houston Dynamo FC,32,40
+LA Galaxy,24,30
+Los Angeles FC,18,20
+Minnesota United FC,20,22
+CF Montreal,27,27
+Nashville SC,26,26
+Portland Timbers,28,25
+Real Salt Lake,23,28
+San Jose Earthquakes,25,30
+Seattle Sounders FC,15,20
+Sporting Kansas City,16,25
+St. Louis City SC,18,37
+Vancouver Whitecaps FC,19,17

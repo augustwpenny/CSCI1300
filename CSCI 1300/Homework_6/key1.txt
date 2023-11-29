@@ -1,0 +1,10 @@
+giveaway 2
+guaranteed 2
+miracle 2
+promise 1
+promotion 1
+dollars 3
+satisfied 2
+paid 1
+refund 1
+trial 2

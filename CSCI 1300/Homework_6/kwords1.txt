@@ -1,0 +1,4 @@
+limited 3
+lucky 5
+win 6
+gift 5
