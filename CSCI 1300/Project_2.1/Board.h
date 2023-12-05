@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include"CandyStore.h"
 #define RED "\033[;41m"     /* Red */
 #define GREEN "\033[;42m"   /* Green */
 #define BLUE "\033[;44m"    /* Blue */
@@ -24,6 +25,7 @@ struct Tile // Struct for each tile on the board. can store the color of the til
     string color;
     string tile_type;
     int player;
+    int special;
 };
 
 
@@ -32,19 +34,24 @@ class Board
 private:
     const static int _BOARD_SIZE = 83; // Number of tiles
     Tile _tiles[_BOARD_SIZE];
-    // const static int _NUM_CANDY_STORES = 3; // Number of candy stores
-    // int _candy_store_position[_NUM_CANDY_STORES];
-    // int _candy_store_count;
-    // Candy _candyStores[_NUM_CANDY_STORES];
+    const static int _NUM_CANDY_STORES = 3; // Number of candy stores
+    int _candy_store_position[_NUM_CANDY_STORES];
+    CandyStore _candyStores[_NUM_CANDY_STORES];
     int _positions[2];
     // vector<int> _gummySquares();
 
 public:
     Board();
-
+    
     void resetBoard();
     void displayTile(int);
     void displayBoard();
+    void setSpecials();
+    int getSpecial(int); // return special type at the tile at int
+    int getPosition(int); // Return the int of the players location
+    void addStores(CandyStore, int, int);
+    CandyStore getStore(int);
+    // int isStore(int);
 
     bool setPlayerPosition(int, int);
 
@@ -53,10 +60,11 @@ public:
     int getPlayerPosition(int) const;
     // void setGummyTrap(int);
 
-    // bool addCandyStore(int);
+    // bool addCandyStore(int); 
     // bool isPositionCandyStore(int); 
 
-    bool movePlayer(int, int);
+    void movePlayer(int, int);
+
 };
 
 #endif

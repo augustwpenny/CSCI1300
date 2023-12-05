@@ -11,14 +11,11 @@ using namespace std;
 
 Board::Board()
 {
+    srand(time(0));
     resetBoard();
-    // _candyStores[0]=c1;
-    // _candyStores[1]=c2;
-    // _candyStores[2]=c3;
-    // addCandyStore(c1.getPosition());
-    // addCandyStore(c2.getPosition());
-    // addCandyStore(c3.getPosition());
+    
 }
+
 
 void Board::resetBoard()
 {
@@ -53,7 +50,13 @@ void Board::displayTile(int position)
     }
     Tile target = _tiles[position];
     cout << target.color << " ";
-    if (position == _positions[0])
+
+
+    if(position == _positions[0] && position == _positions[1])
+    {
+        cout << "1|2";
+    }
+    else if (position == _positions[0])
     {
         cout << 1;
     }
@@ -65,6 +68,8 @@ void Board::displayTile(int position)
     {
         cout << " ";
     }
+    
+
     cout << " " << RESET;
 }
 
@@ -121,6 +126,52 @@ bool Board::setPlayerPosition(int new_position, int player)
     return false;
 }
 
+ void Board::addStores(CandyStore store, int location, int num)
+ {
+    _candyStores[num]=store;
+    _candy_store_position[num]=location;
+    
+ }
+
+CandyStore Board::getStore(int index)
+{
+    return _candyStores[index];
+}
+
+// int Board::isStore(int index)
+// {
+//     for(int i=0;i<3;i++)
+//     {
+//         if(index==_candy_store_position[i])
+//         {
+//             return i+1;
+//         }
+//     }
+//     return -1;
+// }
+
+void Board::setSpecials()
+{
+    _tiles[rand()%80].special=1;
+    _tiles[rand()%80].special=2;
+    _tiles[rand()%80].special=3;
+    _tiles[rand()%80].special=4;
+    _tiles[rand()%80].special=1;
+    _tiles[rand()%80].special=2;
+    _tiles[rand()%80].special=3;
+    _tiles[rand()%80].special=4;
+}
+
+int Board::getPosition(int player)
+{
+    return _positions[player];
+}
+
+int Board::getSpecial(int index)
+{
+    return _tiles[index].special;
+}
+
 int Board::getBoardSize() const
 {
     return _BOARD_SIZE;
@@ -159,15 +210,13 @@ int Board::getPlayerPosition(int player) const
 //     return false;
 // }
 
-bool Board::movePlayer(int newPos, int player)
+void Board::movePlayer(int numTiles, int player)
 {
-    
-    if(newPos < 0 || newPos >= _BOARD_SIZE)
-    {
-        return false;
-    }
-    _positions[player] = newPos;
-    return true;
+    int curPos=_positions[player];
+    int newPos = curPos + numTiles;
+
+    setPlayerPosition(newPos, player);
+
 }
 // void Board::setGummyTrap(int position)
 // {

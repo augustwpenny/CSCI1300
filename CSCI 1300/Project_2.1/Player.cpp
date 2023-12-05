@@ -1,3 +1,4 @@
+#include<iostream>
 #include "Player.h"
 
 using namespace std;
@@ -9,6 +10,7 @@ Player::Player()
     _stamina=0;
     _gold=0;
     _position=0;
+    _numCandies=0;
 
 
 }
@@ -91,23 +93,53 @@ int Player::getStamina()
 void Player::printInventory()
 {
     cout << "Name: " << _name << "\nStamina: " << _stamina << "\nGold: " << _gold << "\nPosition: " << _position << "\nCandies: "<< endl;
-    for(int i=0;i<9;i++)
+    for(int i=0;i<9;i+=3)
     {
-        cout << "Name: "<<_inventory[i].name << "\n"  endl;
+        cout << "["<<_inventory[i].name << "]   [" << _inventory[i+1].name << "]   [" << _inventory[i+2].name << "]\n" << endl;
     }
 }
 
 void Player::printCandies()
 {
-    for(int j=0;j<9;j++)
+    for(int j=1;j<=9;j++)
     {
-        cout << "["<< _inventory[i].getName() << "]  ";
-        if(i%3==0)
+        cout << "[ ("<<j<<")   " << _inventory[j-1].name << "]  ";
+        if(j%3==0)
         {
             cout << endl;
         }
     }
 }
+
+ Candy Player::getCandy(int index)
+ {
+    return _inventory[index];
+ }
+
+
+void Player::removeCandy(int index)
+{
+    for(int i=index;i<8;i++)
+    {
+        _inventory[i]=_inventory[i+1];
+    }
+}
+
+int Player::getTurns()
+{
+    return _turns;
+}
+
+void Player::setTurns(int turns)
+{
+    _turns=turns;
+}
+
+void Player::incrementTurns(int turns)
+{
+    _turns+=turns;
+}
+
 
 
 void Player::setInventory(Candy arr[], int length) //use a loop to translate values. the length should come from the _invSize
@@ -122,7 +154,7 @@ void Player::setInventory(Candy arr[], int length) //use a loop to translate val
     if(length<9)
     {
         Candy c1;
-        c1.name="Empty";
+        c1.name="";
         c1.description="";
         c1.EffectType="";
         c1.EffectValue=0;
@@ -139,15 +171,15 @@ void Player::setInventory(Candy arr[], int length) //use a loop to translate val
     }
 }
 
-void setInventory(Candy candy, int index)
-{
-    _inventory[index]=candy;
-}
+// void setInventory(Candy candy, int index)
+// {
+//     _inventory[index]=candy;
+// }
 
-int searchInventory(string name)
-{
-    /*
-    1. looks through the inventory for a candy matching the name inputted
-    2. returns the index of that candy or returns -1 if it cannot find it
-    */
-}
+// int searchInventory(string name)
+// {
+//     /*
+//     1. looks through the inventory for a candy matching the name inputted
+//     2. returns the index of that candy or returns -1 if it cannot find it
+//     */
+// }

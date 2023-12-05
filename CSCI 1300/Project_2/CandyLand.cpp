@@ -5,8 +5,8 @@
 #include<cstdlib>
 #include<string>
 #include"CandyLand.h"
-#include"CandyStore.h"
-#include"Board.h"
+
+
 
 
 using namespace std;
@@ -19,7 +19,6 @@ CandyLand::CandyLand(string candyFile, string characterFile)
 {
     loadCandies(candyFile);
     loadCharacters(characterFile);
-    CandyStore c1, c2, c3; //Need to make three candy stores to pass into the board
 }
 
 
@@ -74,7 +73,7 @@ void CandyLand::printCharacters()
 {
     for(int i=0;i<4;i++)
     {
-        cout << "Name: " << _characters[i].name << "\nStamina: " << _characters[i].stamina << "\nGold: " << _characters[i].gold << "\nCandies: ";
+        cout << i+1 << ".   Name: " << _characters[i].name << "\nStamina: " << _characters[i].stamina << "\nGold: " << _characters[i].gold << "\nCandies: ";
     for(int j=0;j<9;j++)
     {
         cout << "["<< _characters[i].candies[j].name << "]  ";
@@ -105,9 +104,9 @@ void CandyLand::loadCandies(string filename)
 
 Candy CandyLand::randomCandy()
 {
-    /*
-    returns a random candy from the candy list. used to populate stores.
-    */
+    srand(time(0));
+    int ind = rand()%_numCandies;
+    return _candies[ind];
 }
 
 void CandyLand::setupBoard()
@@ -120,6 +119,33 @@ void CandyLand::setupBoard()
     3. 
     */
 }
+void CandyLand::setupStores()
+{
+    srand(time(0));
+    int r1, r2, r3;
+    r1=rand()%10;
+    r2=rand()%9;
+    r3=rand()%9;
+    
+    _c1.setPosition(_firstPos[r1]);
+    _c2.setPosition(_secondPos[r2]);
+    _c3.setPosition(_thirdPos[r3]);
+
+    _stores[0]=_firstPos[r1];
+    _stores[1]=_secondPos[r2];
+    _stores[2]=_thirdPos[r3];
+
+    for(int i=0;i<9;i++)
+    {
+        _c1.addCandy(randomCandy(), i);
+        _c2.addCandy(randomCandy(), i);
+        _c3.addCandy(randomCandy(), i);
+        _firststore.addCandy(randomCandy(), i);
+    }
+
+    
+}
+
 
 Card CandyLand::drawCard()
 {
@@ -139,7 +165,7 @@ Card CandyLand::drawCard()
     return temp;
 }
 
-void CandyLand::move(Player player, Card card)
+void CandyLand::move(Player player, Card card, int person)
 {
     int current= player.getPosition();
 
@@ -150,10 +176,12 @@ void CandyLand::move(Player player, Card card)
         if(card.dbl==true) 
         {
             player.setPosition(current+6);
+            _board.movePlayer(current+6, person);
         }
         else 
         {
             player.setPosition(current+3);
+            _board.movePlayer(current+3, person);
         }
         
     }
@@ -162,10 +190,12 @@ void CandyLand::move(Player player, Card card)
         if(card.dbl==true) 
         {
             player.setPosition(current+4);
+            _board.movePlayer(current+4, person);
         }
         else 
         {
             player.setPosition(current+1);
+            _board.movePlayer(current+1, person);
         }
     }
     if(current%3==2)
@@ -173,10 +203,12 @@ void CandyLand::move(Player player, Card card)
         if(card.dbl==true) 
         {
             player.setPosition(current+5);
+            _board.movePlayer(current+5, person);
         }
         else 
         {
             player.setPosition(current+2);
+            _board.movePlayer(current+2, person);
         }
     }
     }
@@ -188,10 +220,12 @@ void CandyLand::move(Player player, Card card)
         if(card.dbl==true) 
         {
             player.setPosition(current+5);
+            _board.movePlayer(current+5, person);
         }
         else 
         {
             player.setPosition(current+2);
+            _board.movePlayer(current+2, person);
         }
         
     }
@@ -200,10 +234,12 @@ void CandyLand::move(Player player, Card card)
         if(card.dbl==true) 
         {
             player.setPosition(current+3);
+            _board.movePlayer(current+3, person);
         }
         else 
         {
             player.setPosition(current+6);
+            _board.movePlayer(current+6, person);
         }
     }
     if(current%3==2)
@@ -211,10 +247,12 @@ void CandyLand::move(Player player, Card card)
         if(card.dbl==true) 
         {
             player.setPosition(current+4);
+            _board.movePlayer(current+4, person);
         }
         else 
         {
             player.setPosition(current+1);
+            _board.movePlayer(current+1, person);
         }
     }
     }
@@ -226,10 +264,12 @@ void CandyLand::move(Player player, Card card)
         if(card.dbl==true) 
         {
             player.setPosition(current+5);
+            _board.movePlayer(current+5, person);
         }
         else 
         {
             player.setPosition(current+2);
+            _board.movePlayer(current+2, person);
         }
         
     }
@@ -238,10 +278,12 @@ void CandyLand::move(Player player, Card card)
         if(card.dbl==true) 
         {
             player.setPosition(current+4);
+            _board.movePlayer(current+4, person);
         }
         else 
         {
             player.setPosition(current+1);
+            _board.movePlayer(current+1, person);
         }
     }
     if(current%3==2)
@@ -249,16 +291,16 @@ void CandyLand::move(Player player, Card card)
         if(card.dbl==true) 
         {
             player.setPosition(current+6);
+            _board.movePlayer(current+6, person);
         }
         else 
         {
             player.setPosition(current+3);
+            _board.movePlayer(current+3, person);
         }
     }
     }
 
-    
-    
 
 }
 
@@ -288,7 +330,47 @@ void setupPlayer(int player, int character, string name) // int is for which pla
 
 }
 
-void useCandy()
+void useCandy(int player)
+{
+    string choice;
+    string effectType;
+    int value=0;
+    int affectedPlayer=0;
+    if(player==0) affectedPlayer=1;
+
+    cout << "Here are your candies:" << endl;
+    _players[player].printCandies();
+    cout << "Enter your choice of candy to use:"<< endl;
+    getline(cin, choice);
+    for(int i=0;i<_numCandies;i++)
+    {
+        if(_candies[i].name==choice)
+        {
+            effectType=_candies[i].effectType;
+            value=_candies[i].effectValue;
+            break;
+        }
+    }
+    if(effectType=="magical")
+    {
+        int current=_players[player].getStamina();
+        _players[player].setStamina(current+value);
+    }
+    else if(effectType=="poison") // work out how immunity candy works
+    {
+        int current=_players[affectedPlayer].getStamina();
+        _players[affectedPlayer].setStamina(current+value);
+    }
+    else if(effectType=="immunity")
+    {
+        cout << "Cannot use this candy unless posion candy is used against you" << endl;
+    }
+    
+    // else if(effectType=="gummy")
+    // {
+    //     b.
+    // }
+}
 
 int showTurn()
 {
@@ -297,6 +379,18 @@ int showTurn()
     getline(cin,choice);
     return choice;
     
+}
+
+int CandyLand::checkIsStore(int position) // returns which store is at the position
+{
+    for(int i=0;i<3;i++)
+    {
+        if(position==_stores[i])
+        {
+            return i;
+        }
+    }
+    return -1;
 }
 
 void startGame()
@@ -346,22 +440,40 @@ void startGame()
 
 
     int turn=0;
-    while(_players[0].getPosition()<78 && _players[1].getPosition()<78)
+    int choice;
+    bool loop=true;
+    while(loop==true;)
     {
+        choice=showTurn();
         cout << "It's " << _players[turn].getName(); < "'s turn" << endl;
-        if(showTurn()==1)
+        if(choice=3)
+        {
+            _players[turn].printInventory();
+            choice=showTurn();
+        }
+
+        if(choice==1)
         {
             Card temp=drawCard();
             cout << "You drew a " << temp.name << "." << endl;
             move(_players[turn], Card temp);
+            int store=checkIsStore(_players[turn].getPosition())
+            if(store>=0)
+            {
+                char enter;
+                cout << "You landed on a store. Enter?(y/n)" << endl;
+                cin >> enter;
+                if(enter=='y')
+                {
+                    _stores[store].shop();
+                }
+            }
             cout << "This is the new board" << endl;
             _board.displayBoard();
         }
-        if(showTurn()==2)
+        else if(choice==2)
         {
-            /*
-            This is where use candy is called. not sure how to impliment this yet
-            */
+            
         }
 
 

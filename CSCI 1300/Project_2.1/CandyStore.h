@@ -3,8 +3,6 @@
 
 #include"Player.h"
 
-
-
 using namespace std;
 
 class CandyStore{
@@ -14,12 +12,12 @@ class CandyStore{
 
     public:
     CandyStore();
-    CandyStore(Candy candies[]);
+    CandyStore(Candy candies[], int);
 
     void removeCandy(string);
     void addCandy(Candy, int);
     Candy getCandy(int);
-    Candy findCandy(string);
+    // Candy findCandy(string);
     void printCandies();
     int getPosition();
     void setPosition(int);

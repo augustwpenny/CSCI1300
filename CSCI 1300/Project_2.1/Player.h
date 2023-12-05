@@ -2,7 +2,7 @@
 #define PLAYER_H
 
 #include<string>
-#include"CandyLand.h"
+
 
 using namespace std;
 
@@ -13,9 +13,10 @@ struct Candy  // Struct for candy that will store info about candies in stores a
     string EffectType; //Needs to be gummy, immunity, poison or magical
     int EffectValue;
     string Type;
-    double price;
+    int price;
     
 };
+
 
 class Player{
     private:
@@ -24,7 +25,8 @@ class Player{
         int _gold;
         int _position;
         Candy _inventory[9];
-        int _number;
+        int _numCandies;
+        int _turns=0;
 
     public:
 
@@ -34,8 +36,15 @@ class Player{
     void setName(string);
     string getName();
 
+    int getTurns();
+    void setTurns(int);
+    void incrementTurns(int);
+
     void setPosition(int);
     int getPosition();
+
+    Candy getCandy(int);
+    void removeCandy(int);
 
     void setStamina(int);
     int getStamina();
@@ -46,8 +55,8 @@ class Player{
     void setInventory(Candy arr[], int); //use a loop to translate values. the length should come from the _invSize
     void printInventory();
     void printCandies();
-    void setInventory(Candy, int);
-    int searchInventory(string);
+    // void setInventory(Candy, int);
+    // int searchInventory(string);
     
 
 

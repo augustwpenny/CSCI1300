@@ -42,17 +42,17 @@ Candy CandyStore::getCandy(int i)
     return _candies[i];
 }
 
-int CandyStore::findCandy(string s) // Returns the index of a candy in the shop. returns -1 if that candy cant be found
-{
-    for(int i=0;i<3;i++)
-    {
-        if(_candies[i].name==s)
-        {
-            return i;
-        }
-    }
-    return -1;
-}
+// int CandyStore::findCandy(string s) // Returns the index of a candy in the shop. returns -1 if that candy cant be found
+// {
+//     for(int i=0;i<3;i++)
+//     {
+//         if(_candies[i].name==s)
+//         {
+//             return i;
+//         }
+//     }
+//     return -1;
+// }
 
 void CandyStore::addCandy(Candy candy, int i)
 {
