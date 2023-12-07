@@ -126,7 +126,12 @@ bool Board::setPlayerPosition(int new_position, int player)
     return false;
 }
 
- void Board::addStores(CandyStore store, int location, int num)
+int Board::getPosition(int player)
+{
+    return _positions[player];
+}
+
+void Board::addStores(CandyStore store, int location, int num)
  {
     _candyStores[num]=store;
     _candy_store_position[num]=location;
@@ -138,17 +143,17 @@ CandyStore Board::getStore(int index)
     return _candyStores[index];
 }
 
-// int Board::isStore(int index)
-// {
-//     for(int i=0;i<3;i++)
-//     {
-//         if(index==_candy_store_position[i])
-//         {
-//             return i+1;
-//         }
-//     }
-//     return -1;
-// }
+int Board::isStore(int index)
+{
+    for(int i=0;i<3;i++)
+    {
+        if(index==_candy_store_position[i])
+        {
+            return i;
+        }
+    }
+    return -1;
+}
 
 void Board::setSpecials()
 {
@@ -162,10 +167,7 @@ void Board::setSpecials()
     _tiles[rand()%80].special=4;
 }
 
-int Board::getPosition(int player)
-{
-    return _positions[player];
-}
+
 
 int Board::getSpecial(int index)
 {
@@ -177,38 +179,11 @@ int Board::getBoardSize() const
     return _BOARD_SIZE;
 }
 
-// int Board::getCandyStoreCount() const
-// {
-//     return _candy_store_count;
-// }
 
 int Board::getPlayerPosition(int player) const
 {
     return _positions[player];
 }
-
-// bool Board::addCandyStore(int position)
-// {
-//     if (_candy_store_count >= _NUM_CANDY_STORES)
-//     {
-//         return false;
-//     }
-//     _candy_store_position[_candy_store_count] = position;
-//     _candy_store_count++;
-//     return true;
-// }
-
-// bool Board::isPositionCandyStore(int board_position) // Checks to see if a players position is a candy store
-// {
-//     for (int i = 0; i < _candy_store_count; i++)
-//     {
-//         if(_candy_store_position[i] == board_position)
-//         {
-//             return true;
-//         }
-//     }
-//     return false;
-// }
 
 void Board::movePlayer(int numTiles, int player)
 {
@@ -218,7 +193,4 @@ void Board::movePlayer(int numTiles, int player)
     setPlayerPosition(newPos, player);
 
 }
-// void Board::setGummyTrap(int position)
-// {
-//     _gummySquares.push_back
-// }
+

@@ -1,3 +1,4 @@
+Name|Description|Effect type|Effect value|Candy type|Price
 Frosty Fizz|Boosts player's stamina by 10 units|stamina|10|magical|10
 Lucky Licorice|Decreases opponents stamina by 10 units (mild)|stamina|-10|poison|15
 Ruby Rapture|Forms a gummy barrier on a chosen tile and opponent loses 2 turns|turns|-2|gummy|20

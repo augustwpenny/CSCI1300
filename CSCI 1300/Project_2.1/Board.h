@@ -44,25 +44,21 @@ public:
     Board();
     
     void resetBoard();
-    void displayTile(int);
-    void displayBoard();
-    void setSpecials();
-    int getSpecial(int); // return special type at the tile at int
-    int getPosition(int); // Return the int of the players location
+    void displayTile(int); // displays the tile at each int
+    void displayBoard(); // displays the whole board
+
+    void setSpecials(); // sets the special tiles on the board 
+    int getSpecial(int); // checks to see if a tile is a special tile
+    int getPosition(int); 
     void addStores(CandyStore, int, int);
     CandyStore getStore(int);
-    // int isStore(int);
+    int isStore(int);
 
     bool setPlayerPosition(int, int);
+    int getPlayerPosition(int) const;
 
     int getBoardSize() const;
-    // int getCandyStoreCount() const;
-    int getPlayerPosition(int) const;
-    // void setGummyTrap(int);
-
-    // bool addCandyStore(int); 
-    // bool isPositionCandyStore(int); 
-
+    
     void movePlayer(int, int);
 
 };

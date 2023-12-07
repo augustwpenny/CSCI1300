@@ -3,6 +3,10 @@
 
 using namespace std;
 
+// CSCI 1300 Fall 2023
+// Author: August Penny
+// TA: Guarav Roy
+// Player.cpp
 
 Player::Player()
 {
@@ -16,48 +20,11 @@ Player::Player()
 }
 
 
-
-// Player::Player(string name, int stamina, int gold, Candy candies[], int length, int number)
-// {
-//     _name=name;
-//     _stamina=stamina;
-//     _gold=gold;
-//     _position=0;
-//     _number=number;
-//     if(length>9)
-//     {
-//         for(int i=0;i<9;i++)
-//         {
-//              _inventory[i]=candies[i];
-//         }
-//     }
-//     if(length<9)
-//     {
-//         Candy c1;
-//         c1.name="Empty";
-//         c1.description="";
-//         c1.EffectType="";
-//         c1.EffectValue=0;
-//         c1.Type="";
-//         c1.price = 0;
-//         for(int i=0;i<length;i++)
-//         {
-//             _inventory[i]=candies[i];
-//         }
-//         for(int j=length;j<9;j++)
-//         {
-//             _inventory[j]=c1;
-//         }
-//     }
-// }
-
-
-
-
 void Player::setName(string name)
 {
     _name=name;
 }
+
 string Player::getName()
 {
     return _name;
@@ -67,6 +34,7 @@ void Player::setPosition(int pos)
 {
     _position=pos;
 }
+
 int Player::getPosition()
 {
     return _position;
@@ -76,6 +44,7 @@ void Player::setGold(int gold)
 {
     _gold=gold;
 }
+
 int Player::getGold()
 {
     return _gold;
@@ -85,9 +54,20 @@ void Player::setStamina(int stamina)
 {
     _stamina=stamina;
 }
+
 int Player::getStamina()
 {
     return _stamina;
+}
+
+void Player::setCharName(string name)
+{
+    _charname = name;
+}
+
+string Player::getCharName()
+{
+    return _charname;
 }
 
 void Player::printInventory()
@@ -116,13 +96,18 @@ void Player::printCandies()
     return _inventory[index];
  }
 
-
 void Player::removeCandy(int index)
 {
     for(int i=index;i<8;i++)
     {
         _inventory[i]=_inventory[i+1];
     }
+    
+}
+
+void Player::addCandy(Candy candy)
+{
+
 }
 
 int Player::getTurns()
@@ -140,7 +125,10 @@ void Player::incrementTurns(int turns)
     _turns+=turns;
 }
 
-
+void Player::setCandy(int position, Candy candy)
+{
+    _inventory[position]=candy;
+}
 
 void Player::setInventory(Candy arr[], int length) //use a loop to translate values. the length should come from the _invSize
 {
@@ -170,16 +158,3 @@ void Player::setInventory(Candy arr[], int length) //use a loop to translate val
         }
     }
 }
-
-// void setInventory(Candy candy, int index)
-// {
-//     _inventory[index]=candy;
-// }
-
-// int searchInventory(string name)
-// {
-//     /*
-//     1. looks through the inventory for a candy matching the name inputted
-//     2. returns the index of that candy or returns -1 if it cannot find it
-//     */
-// }

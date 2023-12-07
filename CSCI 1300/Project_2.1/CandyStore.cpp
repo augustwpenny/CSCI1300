@@ -1,6 +1,9 @@
 #include"CandyStore.h"
 #include<iostream>
-
+// CSCI 1300 Fall 2023
+// Author: August Penny
+// TA: Guarav Roy
+// CandyStore.cpp
 using namespace std;
 
 
@@ -11,16 +14,6 @@ CandyStore::CandyStore()
     {
         _candies[i]=temp;
     }
-    
-    
-}
-CandyStore::CandyStore(Candy candies[], int position)
-{
-    for(int i=0;i<3;i++)
-    {
-        _candies[i]=candies[i];
-    }
-    _position=position;
     
 }
 
@@ -37,29 +30,24 @@ void CandyStore::removeCandy(string name)
 
 }
 
+void CandyStore::displayCandy()
+{
+    for(int j=1;j<=3;j++)
+    {
+        cout << "[ ("<<j<<")   " << _candies[j-1].name << "]  ";
+    }
+    cout << endl;
+}
+
 Candy CandyStore::getCandy(int i)
 {
     return _candies[i];
 }
 
-// int CandyStore::findCandy(string s) // Returns the index of a candy in the shop. returns -1 if that candy cant be found
-// {
-//     for(int i=0;i<3;i++)
-//     {
-//         if(_candies[i].name==s)
-//         {
-//             return i;
-//         }
-//     }
-//     return -1;
-// }
-
 void CandyStore::addCandy(Candy candy, int i)
 {
     _candies[i]=candy;
 }
-
-
 
 void CandyStore::printCandies()
 {
@@ -78,21 +66,8 @@ int CandyStore::getPosition()
 {
     return _position;
 }
+
 void CandyStore::setPosition(int position)
 {
     _position=position;
-}
-
-void CandyStore::shop()
-{
-    /*
-    1. print the candies with printCandies()
-    2. Ask which they would like and use getline(cin, choice) to get their choice
-    3. use findCandy to get the index of the candy in the store, and if it returns -1, state that candy cannot be found and prompt again
-    4. if there is not enough gold in their inventory, tell them that and exit
-    5. if there is not enough space, prompt them to choose what to replace. use getCandy to return the candy from the store and then use
-    findCandy in their inventory to get the index of the candy to be replaced in their inventory
-    6. update their gold
-    7. exit the shop
-    */
 }
